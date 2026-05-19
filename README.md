@@ -1,6 +1,3 @@
-cargo run --bin client
-   Berikut adalah draf isi file `README.md` dalam bahasa Indonesia. Penjelasannya sudah dibuat lebih detail, terstruktur, dan tidak *one-liner* agar mudah dipahami serta memenuhi kriteria tugas modul Anda.
-```markdown
 # Aplikasi Chat Broadcast Asinkron (Modul 10)
 
 Aplikasi ini merupakan sistem obrolan berbasis protokol WebSocket yang dibangun menggunakan ekosistem asinkron `tokio` dan `tokio_websockets` di Rust. Sistem ini mengimplementasikan server pusat yang mendengarkan koneksi masuk dan mendistribusikan pesan secara real-time ke seluruh klien yang terhubung menggunakan saluran *broadcast*.
