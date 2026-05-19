@@ -7,7 +7,7 @@ use tokio_websockets::{ClientBuilder, Message};
 #[tokio::main]
 async fn main() -> Result<(), tokio_websockets::Error> {
     let (mut ws_stream, _) =
-        ClientBuilder::from_uri(Uri::from_static("ws://127.0.0.1:8080"))
+        ClientBuilder::from_uri(Uri::from_static("ws://127.0.0.1:2000"))
             .connect()
             .await?;
 
@@ -18,7 +18,6 @@ async fn main() -> Result<(), tokio_websockets::Error> {
 
     loop {
         tokio::select! {
-            // Task 1: Membaca input dari keyboard pengguna
             maybe_line = stdin.next_line() => {
                 match maybe_line {
                     Ok(Some(line)) => {
@@ -27,11 +26,10 @@ async fn main() -> Result<(), tokio_websockets::Error> {
                             ws_stream.send(Message::text(trimmed.to_string())).await?;
                         }
                     }
-                    _ => break,
+                    _ => break, 
                 }
             }
 
-            // Task 2: Menerima pesan yang di-broadcast oleh server
             maybe_msg = ws_stream.next() => {
                 match maybe_msg {
                     Some(Ok(msg)) => {

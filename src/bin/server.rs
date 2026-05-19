@@ -12,6 +12,7 @@ async fn handle_connection(
     bcast_tx: Sender<String>,
 ) -> Result<(), Box<dyn Error + Send + Sync>> {
 
+    // Buat receiver baru khusus untuk koneksi klien ini
     let mut bcast_rx = bcast_tx.subscribe();
 
     loop {
@@ -25,7 +26,6 @@ async fn handle_connection(
                             println!("[LOG] Pesan dari {}: {}", addr, text);
                             
                             let formatted_msg = format!("{}: {}", addr, text);
-                            
                             
                             let _ = bcast_tx.send(formatted_msg);
                         }
@@ -60,8 +60,8 @@ async fn handle_connection(
 async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
     let (bcast_tx, _) = channel(16);
 
-    let listener = TcpListener::bind("127.0.0.1:8080").await?;
-    println!("listening on port 8080");
+    let listener = TcpListener::bind("127.0.0.1:2000").await?;
+    println!("listening on port 2000");
 
     loop {
         let (socket, addr) = listener.accept().await?;
