@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> caa63ac64baf07f1ebb47be4d29d18908cddc6c4
 # Aplikasi Chat Broadcast Asinkron (Modul 10)
 
 Aplikasi ini merupakan sistem obrolan berbasis protokol WebSocket yang dibangun menggunakan ekosistem asinkron `tokio` dan `tokio_websockets` di Rust. Sistem ini mengimplementasikan server pusat yang mendengarkan koneksi masuk dan mendistribusikan pesan secara real-time ke seluruh klien yang terhubung menggunakan saluran *broadcast*.
@@ -24,11 +21,9 @@ Ketika salah satu klien mengetik sebuah pesan di terminalnya lalu menekan tombol
 
 Seketika setelah server menerima pesan tersebut, server akan memformat teks dengan menyertakan alamat IP asal (SocketAddr) dan menyebarkannya (broadcast) ke seluruh instans klien yang sedang aktif. Berdasarkan modifikasi opsional yang telah diimplementasikan, server secara cerdas akan mengecek identitas pengirim terlebih dahulu; pesan hanya akan diteruskan ke terminal klien-klien lain dan tidak akan dipantulkan kembali ke terminal pengirim asli demi menjaga kebersihan log obrolan.
 
-<<<<<<< HEAD
+
 ![Server](screenshots/2_1_server.png)
 ![Client 1](screenshots/2_1_client1.png)
 ![Client 2](screenshots/2_1_client2.png)
 ![Client 3](screenshots/2_1_client3.png)
-=======
-![Broadcast Chat Application Simulation](screenshots/2_1.png)
->>>>>>> caa63ac64baf07f1ebb47be4d29d18908cddc6c4
+
