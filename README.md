@@ -40,3 +40,15 @@ Kedua file tersebut **menggunakan protokol WebSocket yang sama**. Skema protokol
 ![Client 1](screenshots/2_2_client1.png)
 ![Client 2](screenshots/2_2_client2.png)
 ![Client 3](screenshots/2_2_client3.png)
+
+
+### Eksperimen 2.3: Perubahan Kecil (Menambahkan IP dan Port)
+
+Pada eksperimen ini, modifikasi dilakukan untuk menyertakan informasi identitas pengirim berupa alamat IP dan nomor port asal pada setiap pesan yang disiarkan (*broadcast*). Hal ini bertujuan agar setiap klien dapat mengetahui dengan jelas dari mana pesan tersebut berasal tanpa perlu sistem registrasi nama pengguna (*username*) yang kompleks.
+
+#### Alur Pengiriman Pesan dan Alasan Perubahan:
+1. **Penerimaan di Server:** Ketika fungsi `ws_stream.next()` di sisi server menerima sebuah pesan dari klien, server juga memegang variabel `addr` yang bertipe `SocketAddr`. Variabel ini secara otomatis merekam alamat IP lokal beserta port dinamis yang dialokasikan oleh sistem operasi untuk koneksi klien tersebut.
+2. **Formatisasi String (`String Formatting`):** Alasan perubahan ditempatkan di sisi server (menggunakan makro `format!("{}: {}", addr, text)`) adalah demi efisiensi dan keamanan. Daripada meminta setiap klien mengirimkan IP mereka sendiri (yang bisa saja dimanipulasi atau dipalsukan), server bertindak sebagai otoritas tunggal yang valid untuk menempelkan label identitas `IP:Port` tepat di depan teks pesan asli.
+3. **Penyebaran Data:** Pesan yang telah diformat menjadi `"127.0.0.1:[Port]: Pesan"` inilah yang kemudian dikirimkan ke dalam saluran `bcast_tx.send()`, sehingga saat diterima oleh klien-klien lain, informasi pengirim langsung tercetak secara otomatis di layar terminal mereka.
+
+![Hasil Penambahan IP dan Port](screenshots/2_3_server.png)
